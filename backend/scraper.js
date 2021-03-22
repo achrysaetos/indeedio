@@ -9,7 +9,7 @@ Apify.main(async () => {
   // Apify.openRequestQueue() creates a preconfigured RequestQueue instance.
   // We add our first request to it - the initial page the crawler will visit.
   const requestQueue = await Apify.openRequestQueue();
-  await requestQueue.addRequest({ url: "https://techcrunch.com/startups/" });
+  await requestQueue.addRequest({ url: "https://www.indeed.com/q-Software-Engineering-Intern-jobs.html" });
 
   // Create an instance of the PuppeteerCrawler class - a crawler
   // that automatically loads the URLs in headless Chrome / Puppeteer.
@@ -25,7 +25,7 @@ Apify.main(async () => {
     },
 
     // Stop crawling after several pages
-    maxRequestsPerCrawl: 3,
+    maxRequestsPerCrawl: 100,
 
     // This function will be called for each URL to crawl.
     // Here you can write the Puppeteer scripts you are familiar with,
@@ -37,14 +37,15 @@ Apify.main(async () => {
       console.log(`Processing ${request.url}...`);
 
       // A function to be evaluated by Puppeteer within the browser context.
-      const data = await page.$$eval(".post-block__title", ($posts) => {
+      const data = await page.$$eval(".jobsearch-SerpJobCard", ($posts) => {
         const scrapedData = [];
 
         // We're getting the title, rank and URL of each post on Hacker News.
         $posts.forEach(($post) => {
           scrapedData.push({
-            title: $post.querySelector(".post-block__title__link").innerText,
-            href: $post.querySelector(".post-block__title__link").href,
+            title: $post.querySelector(".jobtitle").innerText,
+            company: $post.querySelector(".company").innerText,
+            link: $post.querySelector(".jobtitle").href,
           });
         });
 
@@ -58,7 +59,7 @@ Apify.main(async () => {
       await Apify.utils.enqueueLinks({
         page,
         requestQueue,
-        selector: ".load-more",
+        selector: ".pagination a",
       });
     },
 
@@ -85,6 +86,6 @@ Apify.main(async () => {
   });
 
   // Write the array into the headlines.json file
-  fs.writeFileSync("./apify_storage/techcrunch.json", JSON.stringify(headlines));
+  fs.writeFileSync("./apify_storage/scrapedOutput.json", JSON.stringify(headlines));
   console.log("...Done!");
 });
