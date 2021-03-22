@@ -5,11 +5,23 @@ const fs = require("fs");
 fs.rmdirSync("./apify_storage", { recursive: true }); // update dataset with every run
 process.env.APIFY_LOCAL_STORAGE_DIR = "./apify_storage"; // location of dataset
 
+
+const websiteUrl = "https://www.indeed.com/jobs?q=Software+Engineering+Intern&jt=internship&filter=0"
+const numPagesToScrape = 100
+
+const parentUnitSelector = ".jobsearch-SerpJobCard"
+const childUnitSelector = "" // see line 58 for access to child unit selectors
+const nextPageSelector = ".pagination a"
+
+const datasetLocation = "./apify_storage/datasets/default"
+const outputLocation = "./apify_storage/scrapedOutput.json"
+
+
 Apify.main(async () => {
   // Apify.openRequestQueue() creates a preconfigured RequestQueue instance.
   // We add our first request to it - the initial page the crawler will visit.
   const requestQueue = await Apify.openRequestQueue();
-  await requestQueue.addRequest({ url: "https://www.indeed.com/q-Software-Engineering-Intern-jobs.html" });
+  await requestQueue.addRequest({ url: websiteUrl });
 
   // Create an instance of the PuppeteerCrawler class - a crawler
   // that automatically loads the URLs in headless Chrome / Puppeteer.
@@ -25,7 +37,7 @@ Apify.main(async () => {
     },
 
     // Stop crawling after several pages
-    maxRequestsPerCrawl: 100,
+    maxRequestsPerCrawl: numPagesToScrape,
 
     // This function will be called for each URL to crawl.
     // Here you can write the Puppeteer scripts you are familiar with,
@@ -37,7 +49,7 @@ Apify.main(async () => {
       console.log(`Processing ${request.url}...`);
 
       // A function to be evaluated by Puppeteer within the browser context.
-      const data = await page.$$eval(".jobsearch-SerpJobCard", ($posts) => {
+      const data = await page.$$eval(parentUnitSelector, ($posts) => {
         const scrapedData = [];
 
         // We're getting the title, rank and URL of each post on Hacker News.
@@ -59,7 +71,7 @@ Apify.main(async () => {
       await Apify.utils.enqueueLinks({
         page,
         requestQueue,
-        selector: ".pagination a",
+        selector: nextPageSelector,
       });
     },
 
@@ -73,19 +85,19 @@ Apify.main(async () => {
   await crawler.run();
 
   // Combine the json output files into one array
-  let headlines = [];
-  let filenames = fs.readdirSync("./apify_storage/datasets/default");
+  let scrapedOutput = [];
+  let filenames = fs.readdirSync(datasetLocation);
   filenames.forEach((file) => {
     try {
-      const buffer = fs.readFileSync("./apify_storage/datasets/default/" + file);
-      const headline = JSON.parse(buffer.toString("utf-8"));
-      headlines.push(headline);
+      const buffer = fs.readFileSync(datasetLocation + "/" + file);
+      const data = JSON.parse(buffer.toString("utf-8"));
+      scrapedOutput.push(data);
     } catch (err) {
       console.log("Error parsing JSON string:", err);
     }
   });
 
-  // Write the array into the headlines.json file
-  fs.writeFileSync("./apify_storage/scrapedOutput.json", JSON.stringify(headlines));
+  // Write the array into the scrapedOutput.json file
+  fs.writeFileSync(outputLocation, JSON.stringify(scrapedOutput));
   console.log("...Done!");
 });
