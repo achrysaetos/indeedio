@@ -35,7 +35,7 @@ export default function Register(props) { // exactly the same as ./Login.js
   }
 
   return (
-    <VStack>
+    <VStack mt={40}>
       <Box p={12} width={{ sm: "100%", md: "50%" }} borderWidth={1} borderRadius={12} boxShadow="lg">
         <Box textAlign="center">
           <Heading>Sign Up</Heading>

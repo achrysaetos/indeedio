@@ -13,7 +13,12 @@ function filterCompanies() {
     for (j=0; j<companies.length; j++){
       const companies_cur = companies[j].split(" ")
       if (scrapedOutput_cur.every(x => companies_cur.includes(x)) || companies_cur.every(x => scrapedOutput_cur.includes(x))){
-        potentials.push({company: scrapedOutput[i].company, title: scrapedOutput[i].title, link: scrapedOutput[i].link})
+        potentials.push({
+          company: scrapedOutput[i].company, 
+          title: scrapedOutput[i].title, 
+          link: scrapedOutput[i].link, 
+          location: scrapedOutput[i].location
+        })
       }
     }
   }

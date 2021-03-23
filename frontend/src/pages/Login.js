@@ -30,7 +30,7 @@ export default function Login(props) {
   }
   
   return(
-    <VStack>
+    <VStack mt={40}>
       <Box p={12} width={{ sm: "100%", md: "50%" }} borderWidth={1} borderRadius={12} boxShadow="lg">
         <Box textAlign="center">
           <Heading>Sign In</Heading>

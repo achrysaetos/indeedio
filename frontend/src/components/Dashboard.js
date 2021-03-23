@@ -39,7 +39,8 @@ export default function Dashboard({user, logout}) {
       const filtered = dataDefault.filter(x => {
         return (
           x.title.toLowerCase().includes(keyword.toLowerCase()) || 
-          x.company.toLowerCase().includes(keyword.toLowerCase())
+          x.company.toLowerCase().includes(keyword.toLowerCase()) ||
+          x.location.toLowerCase().includes(keyword.toLowerCase())
         )
       })
       setData(filtered)
@@ -65,7 +66,7 @@ export default function Dashboard({user, logout}) {
         <Flex align="center" alignItems="flex-start">
           <Box>
             <Input textAlign="left" mx={3} px={3} w="300px" size="lg" variant="flushed" focusBorderColor="grey"
-              autoComplete="off" placeholder="Enter search term..." name="keyword" type="text" value={keyword} 
+              autoComplete="off" placeholder="Filter by company, title, or location..." name="keyword" type="text" value={keyword} 
               onChange={e => setKeyword(e.target.value)}
             />
             <Flex justifyContent="flex-end" alignItems="baseline" px={3} pt={1}>

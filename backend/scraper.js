@@ -55,9 +55,10 @@ Apify.main(async () => {
         // We're getting the title, rank and URL of each post on Hacker News.
         $posts.forEach(($post) => {
           scrapedData.push({
-            title: $post.querySelector(".jobtitle").innerText,
             company: $post.querySelector(".company").innerText,
+            title: $post.querySelector(".jobtitle").innerText,
             link: $post.querySelector(".jobtitle").href,
+            location: $post.querySelector(".location").innerText,
           });
         });
 
