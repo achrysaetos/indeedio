@@ -8,6 +8,11 @@ const theme = extendTheme({
           _focus: "outline: 0",
       },
     },
+    Link: {
+      baseStyle: {
+          _focus: "outline: 0",
+      },
+    },
   },
 })
 

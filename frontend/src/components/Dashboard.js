@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, Box, Heading, Flex } from "@chakra-ui/react"
+import { Link, Box, Heading, Flex, Text } from "@chakra-ui/react"
 
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
@@ -21,18 +21,26 @@ export default function Home() {
   return loading ? "" : (
     <Flex justifyContent="flex-start">
       <Menu />
-      <Box w="60%">
-        <Box>
-          <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={2}>Companies</Heading>
-          <Heading fontSize="xl" color="teal.500" textTransform="uppercase" py={2}>Currently Hiring</Heading>
+      <Box>
+        <Box pl={6}>
+          <Box mb={4}>
+            <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={2}>Currently Hiring</Heading>
+            <Heading fontSize="xl" color="teal.500" textTransform="uppercase" py={2}>Software Engineering Intern</Heading>
+            <Text as="em">{data.length} results found.</Text>
+          </Box>
+
           {data.map((x) => {
             return (
-              <Box key={x.company}>
-                {x.company}
-                <Link fontSize="lg" color="black" href={x.link} _hover={{ color: "teal.500" }}>
+              <Flex key={x.company}>
+                <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
+                isExternal w={40} fontWeight="light" _hover={{ color: "black" }}>
+                  {x.company}
+                </Link>
+
+                <Link fontSize="lg" href={x.link} isExternal w={600} _hover={{ color: "teal.500" }}>
                   {x.title}
                 </Link>
-              </Box>
+              </Flex>
             )
           })}
         </Box>
