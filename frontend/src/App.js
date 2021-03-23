@@ -9,7 +9,6 @@ import { AuthProvider } from "./context/auth"
 import AuthRoute from "./util/AuthRoute"
 import { theme } from "./theme"
 
-import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -21,7 +20,6 @@ export default function App() {
       <AuthProvider> {/* pass the user and the login/logout functions from ./context/auth.js, to set/remove the user token */}
         <Router> {/* to route to different pages in the pages folder */}
           <Container> {/* semantic ui class to create margins */}
-            <Navbar />
             <AuthRoute exact path="/" component={() => { window.location.href = 'https://achrysaetos.webflow.io/' }} />
             <Route exact path="/" component={Home} />
             <AuthRoute exact path="/login" component={Login} /> {/* redirect to home if user is logged in */}

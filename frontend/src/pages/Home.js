@@ -4,8 +4,8 @@ import { AuthContext } from "../context/auth"
 import Dashboard from "../components/Dashboard"
 
 export default function Home() {
-  const { user } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext)
     
-  return user ? <Dashboard /> : ""
+  return user ? <Dashboard user={user} logout={logout} /> : ""
 
 }
