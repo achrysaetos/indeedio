@@ -30,7 +30,10 @@ export default function Dashboard({user, logout}) {
   useEffect(() => {
     const updateKeyword = (keyword) => {
       const filtered = dataDefault.filter(x => {
-        return x.title.toLowerCase().includes(keyword.toLowerCase())
+        return (
+          x.title.toLowerCase().includes(keyword.toLowerCase()) || 
+          x.company.toLowerCase().includes(keyword.toLowerCase())
+        )
       })
       setData(filtered)
     }
@@ -87,17 +90,16 @@ export default function Dashboard({user, logout}) {
             <Box mb={4} w="100%">
               <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={2}>Currently Hiring</Heading>
               <Heading fontSize="xl" color="teal.500" textTransform="uppercase" py={2}>Software Engineering Intern</Heading>
-              <Text as="em">{data.length} results ({data.length} total)</Text>
+              <Text as="em">{data.length} results ({dataDefault.length} total)</Text>
             </Box>
 
             {data.map((x) => {
               return (
-                <Flex key={Math.random().toString(36).substring(9)}>
+                <Flex key={Math.random().toString(36).substring(4)}>
                   <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
                   isExternal w={40} fontWeight="light" _hover={{ color: "black" }}>
                     {x.company}
                   </Link>
-
                   <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
                     {x.title}
                   </Link>
