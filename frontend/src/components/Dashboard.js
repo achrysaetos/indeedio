@@ -13,20 +13,26 @@ export default function Dashboard({user, logout}) {
   const [data, setData] = useState([]);
   const [dataDefault, setDataDefault] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [ sortBy, setSortBy ] = useState("Relevancy")
+  const [ keyword, setKeyword ] = useState("")
   
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8080")
-      const data = await response.json()
-      data.sort((a,b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
+      let data = await response.json()
+      const data_copy = data.slice()
+      if (sortBy === "Alphabetical"){
+        data.sort((a,b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
+      } else {
+        data = data_copy
+      }
       setData(data)
       setDataDefault(data)
       setLoading(false)
     }
     fetchData()
-  }, [])
-
-  const [ keyword, setKeyword ] = useState("")
+  }, [sortBy])
 
   useEffect(() => {
     const updateKeyword = (keyword) => {
@@ -41,8 +47,14 @@ export default function Dashboard({user, logout}) {
     updateKeyword(keyword)
   }, [dataDefault, keyword]) // run useEffect to updateKeyword every time keyword changes
 
+  const changeSortOption = () => {
+    if (sortBy === "Relevancy") setSortBy("Alphabetical")
+    else setSortBy("Relevancy")
+  }
+  
   return loading ? "" : (
     <>
+      {/* NAVBAR */}
       <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" py={6} pl={6}>
         <Flex align="center">
           <Heading size="lg" color="teal.500" as={HomeLink} to="/" _hover={{ color: "teal.500" }}>
@@ -52,22 +64,14 @@ export default function Dashboard({user, logout}) {
 
         <Flex align="center" alignItems="flex-start">
           <Box>
-            <Input 
-              textAlign="left"
-              mx={3}
-              px={3}
-              w="300px"
-              size="lg" 
-              variant="flushed"
-              focusBorderColor="grey"
-              autoComplete="off"
-              placeholder="Enter search term..."
-              name="keyword"
-              type="text"
-              value={keyword}
+            <Input textAlign="left" mx={3} px={3} w="300px" size="lg" variant="flushed" focusBorderColor="grey"
+              autoComplete="off" placeholder="Enter search term..." name="keyword" type="text" value={keyword} 
               onChange={e => setKeyword(e.target.value)}
             />
-            <Text textAlign="right" px={3} pt={1}>Sorted by: Relevancy</Text>
+            <Flex justifyContent="flex-end" alignItems="baseline" px={3} pt={1}>
+              <Text mr={1} fontWeight="semibold">Sorted by:</Text>
+              <Link onClick={() => changeSortOption()} fontWeight="light" _hover={{ color: "black" }}>{sortBy}</Link>
+            </Flex>
           </Box>
           
           <MenuX>
@@ -87,6 +91,7 @@ export default function Dashboard({user, logout}) {
         </Flex>
       </Flex>
 
+      {/* DASHBOARD */}
       <Flex justifyContent="flex-start">
         <Menu />
         <Box w="100%">
