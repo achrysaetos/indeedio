@@ -18,6 +18,7 @@ export default function Dashboard({user, logout}) {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8080")
       const data = await response.json()
+      data.sort((a,b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
       setData(data)
       setDataDefault(data)
       setLoading(false)
@@ -42,30 +43,33 @@ export default function Dashboard({user, logout}) {
 
   return loading ? "" : (
     <>
-      <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" py={6} pl={6} mb={3}>
+      <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" py={6} pl={6}>
         <Flex align="center">
           <Heading size="lg" color="teal.500" as={HomeLink} to="/" _hover={{ color: "teal.500" }}>
             ACHRYSAETOS
           </Heading>
         </Flex>
 
-        <Flex align="center">
-          <Input 
-            textAlign="left"
-            mx={3}
-            px={3}
-            w="300px"
-            size="lg" 
-            variant="flushed"
-            focusBorderColor="grey"
-            autoComplete="off"
-            placeholder="Enter search term..."
-            name="keyword"
-            type="text"
-            value={keyword}
-            onChange={e => setKeyword(e.target.value)}
-          />
-
+        <Flex align="center" alignItems="flex-start">
+          <Box>
+            <Input 
+              textAlign="left"
+              mx={3}
+              px={3}
+              w="300px"
+              size="lg" 
+              variant="flushed"
+              focusBorderColor="grey"
+              autoComplete="off"
+              placeholder="Enter search term..."
+              name="keyword"
+              type="text"
+              value={keyword}
+              onChange={e => setKeyword(e.target.value)}
+            />
+            <Text textAlign="right" px={3} pt={1}>Sorted by: Relevancy</Text>
+          </Box>
+          
           <MenuX>
             <MenuButton as={Button} colorScheme="teal" rightIcon={<ChevronDownIcon />} size="lg" mr={6}>
               {user.username.substr(0, 1).toUpperCase()}
