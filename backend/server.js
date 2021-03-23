@@ -17,3 +17,22 @@ mongoose
   .then((res) => {
     console.log(`Server running at ${res.url}`) // console log the port
   })
+
+  
+const express = require("express")
+const app = express()
+const port = 8080
+const cors = require("cors");
+const filterCompanies = require("./filter.js");
+
+app.use(cors()) // easiest way to enable cors
+// create the server for your express api endpoint
+app.get('/', (req, res) => {
+  try {
+    res.json(filterCompanies.filterCompanies());
+  } catch {
+    res.json({"message": "loading"})
+  }
+});
+
+app.listen(port, () => console.log(`Express API endpoint listening at http://localhost:${port}`));
