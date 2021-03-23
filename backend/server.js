@@ -23,13 +23,13 @@ const express = require("express")
 const app = express()
 const port = 8080
 const cors = require("cors");
-const filterCompanies = require("./filter.js");
+const filter = require("./filter.js");
 
 app.use(cors()) // easiest way to enable cors
 // create the server for your express api endpoint
 app.get('/', (req, res) => {
   try {
-    res.json(filterCompanies.filterCompanies());
+    res.json(filter.filterCompanies());
   } catch {
     res.json({"message": "loading"})
   }

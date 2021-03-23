@@ -22,7 +22,7 @@ export default function App() {
         <Router> {/* to route to different pages in the pages folder */}
           <Container> {/* semantic ui class to create margins */}
             <Navbar />
-            <AuthRoute exact path="/" component={() => { window.location.href = 'https://card-app.webflow.io/' }} />
+            <AuthRoute exact path="/" component={() => { window.location.href = 'https://achrysaetos.webflow.io/' }} />
             <Route exact path="/" component={Home} />
             <AuthRoute exact path="/login" component={Login} /> {/* redirect to home if user is logged in */}
             <AuthRoute exact path="/register" component={Register} /> {/* redirect to home if user is logged in */}
