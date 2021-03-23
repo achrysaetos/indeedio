@@ -1,23 +1,22 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { Box, Heading, Flex, Text, Button } from "@chakra-ui/react"
+import { Box, Heading, Flex, Text, Button, Input } from "@chakra-ui/react"
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from "@chakra-ui/react"
 import { ChevronDownIcon } from "@chakra-ui/icons"
 
-import AddCardBtn from "./navbar/AddCardBtn"
-import MessagesBtn from "./navbar/MessagesBtn"
-import ProfileBtn from "./navbar/ProfileBtn"
 import { AuthContext } from "../context/auth"
 
 export default function MenuBar() {
   const { user, logout } = useContext(AuthContext)
-  
-  /* Set active tab in navbar
-  const pathname = window.location.pathname // the location object's url port
-  const path = pathname === "/" ? "home" : pathname.substr(1) // path = name in pathname "/[name]"
-  const [activeItem, setActiveItem] = useState(path)
-  const handleItemClick = (e, { name }) => setActiveItem(name) // set the active item where the name matches the path
-  */
+  const [ keyword, setKeyword ] = useState("")
+
+  useEffect(() => {
+    updateKeyword(keyword)
+  }, [keyword]) // run useEffect to updateKeyword every time keyword changes
+
+  const updateKeyword = (keyword) => {
+    console.log(keyword)
+  }
 
   const menuBar = user ? (
     <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" py={6} pl={6} mb={3}>
@@ -28,9 +27,21 @@ export default function MenuBar() {
       </Flex>
 
       <Flex align="center">
-        <AddCardBtn />
-        <MessagesBtn />
-        <ProfileBtn />
+        <Input 
+          textAlign="left"
+          mx={3}
+          px={3}
+          w="300px"
+          size="lg" 
+          variant="flushed"
+          focusBorderColor="grey"
+          autoComplete="off"
+          placeholder="Enter search term..."
+          name="keyword"
+          type="text"
+          value={keyword}
+          onChange={e => setKeyword(e.target.value)}
+        />
 
         <Menu>
           <MenuButton as={Button} colorScheme="teal" rightIcon={<ChevronDownIcon />} size="lg" mr={6}>
