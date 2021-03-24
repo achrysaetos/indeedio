@@ -110,17 +110,17 @@ export default function Dashboard({user, logout}) {
                   isExternal w={40} fontWeight="light" _hover={{ color: "black" }}>
                     {x.company}
                   </Link>
-                  <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
-                    <Tooltip label={
-                        <>
-                          <Text>{x.location}</Text>
-                          <Text>Posted {x.posted}</Text>
-                        </>
-                      } placement="right"
-                    >
+                  <Tooltip label={
+                      <>
+                        <Text>{x.location}</Text>
+                        <Text>Posted {x.posted}</Text>
+                      </>
+                    } placement="right" w="xl" hasArrow arrowSize={15}
+                  >
+                    <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
                       {x.title}
-                    </Tooltip>
-                  </Link>
+                    </Link>
+                  </Tooltip>
                 </Flex>
               )
             })}
