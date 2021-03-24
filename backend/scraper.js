@@ -59,6 +59,7 @@ Apify.main(async () => {
             title: $post.querySelector(".jobtitle").innerText,
             link: $post.querySelector(".jobtitle").href,
             location: $post.querySelector(".location").innerText,
+            posted: $post.querySelector(".date").innerText,
           });
         });
 

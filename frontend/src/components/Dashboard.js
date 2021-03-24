@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, Box, Heading, Flex, Text } from "@chakra-ui/react"
+import { Link, Box, Heading, Flex, Text, Tooltip } from "@chakra-ui/react"
 
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
@@ -111,7 +111,15 @@ export default function Dashboard({user, logout}) {
                     {x.company}
                   </Link>
                   <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
-                    {x.title}
+                    <Tooltip label={
+                        <>
+                          <Text>{x.location}</Text>
+                          <Text>Posted {x.posted}</Text>
+                        </>
+                      } placement="right"
+                    >
+                      {x.title}
+                    </Tooltip>
                   </Link>
                 </Flex>
               )

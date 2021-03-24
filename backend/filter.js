@@ -17,7 +17,8 @@ function filterCompanies() {
           company: scrapedOutput[i].company, 
           title: scrapedOutput[i].title, 
           link: scrapedOutput[i].link, 
-          location: scrapedOutput[i].location
+          location: scrapedOutput[i].location,
+          posted: scrapedOutput[i].posted,
         })
       }
     }
