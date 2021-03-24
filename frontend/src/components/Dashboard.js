@@ -71,7 +71,7 @@ export default function Dashboard({user, logout}) {
             />
             <Flex justifyContent="flex-end" alignItems="baseline" px={3} pt={1}>
               <Text mr={1} fontWeight="semibold">Sorted by:</Text>
-              <Link onClick={() => changeSortOption()} fontWeight="light" _hover={{ color: "black" }}>{sortBy}</Link>
+              <Link onClick={() => changeSortOption()} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>{sortBy}</Link>
             </Flex>
           </Box>
           
@@ -107,7 +107,7 @@ export default function Dashboard({user, logout}) {
               return (
                 <Flex key={Math.random().toString(36).substring(4)}>
                   <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
-                  isExternal w={40} fontWeight="light" _hover={{ color: "black" }}>
+                  isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
                     {x.company}
                   </Link>
                   <Tooltip label={
