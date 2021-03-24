@@ -12,6 +12,7 @@ import { theme } from "./theme"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import Discover from "./pages/Discover"
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
           <Container> {/* semantic ui class to create margins */}
             <AuthRoute exact path="/" component={() => { window.location.href = 'https://achrysaetos.webflow.io/' }} />
             <Route exact path="/" component={Home} />
+            <Route exact path="/Discover" component={Discover} />
             <AuthRoute exact path="/login" component={Login} /> {/* redirect to home if user is logged in */}
             <AuthRoute exact path="/register" component={Register} /> {/* redirect to home if user is logged in */}
           </Container>

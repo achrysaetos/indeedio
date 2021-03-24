@@ -9,6 +9,9 @@ import { ChevronDownIcon } from "@chakra-ui/icons"
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
 
+const dataFromArray = require("../companies.js")
+const companies = dataFromArray.companies
+
 export default function Dashboard({user, logout}) {
   const [data, setData] = useState([]);
   const [dataDefault, setDataDefault] = useState([]);
@@ -17,10 +20,31 @@ export default function Dashboard({user, logout}) {
   const [ sortBy, setSortBy ] = useState("Relevancy")
   const [ keyword, setKeyword ] = useState("")
   
+  function filterCompanies(scrapedOutput) {
+    let potentials = []
+    for (let i=0; i<scrapedOutput.length; i++){
+      const scrapedOutput_cur = scrapedOutput[i].company.toLowerCase().split(" ")
+      for (let j=0; j<companies.length; j++){
+        const companies_cur = companies[j].split(" ")
+        if (scrapedOutput_cur.every(x => companies_cur.includes(x)) || companies_cur.every(x => scrapedOutput_cur.includes(x))){
+          potentials.push({
+            company: scrapedOutput[i].company, 
+            title: scrapedOutput[i].title, 
+            link: scrapedOutput[i].link, 
+            location: scrapedOutput[i].location,
+            posted: scrapedOutput[i].posted,
+          })
+        }
+      }
+    }
+    return potentials
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8080")
       let data = await response.json()
+      data = filterCompanies(data)
       const data_copy = data.slice()
       if (sortBy === "Alphabetical"){
         data.sort((a,b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))

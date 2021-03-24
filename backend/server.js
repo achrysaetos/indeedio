@@ -23,13 +23,15 @@ const express = require("express")
 const app = express()
 const port = 8080
 const cors = require("cors");
-const filter = require("./filter.js");
+const fs = require("fs");
 
 app.use(cors()) // easiest way to enable cors
 // create the server for your express api endpoint
 app.get('/', (req, res) => {
   try {
-    res.json(filter.filterCompanies());
+    const dataFromScraper = fs.readFileSync("./apify_storage/scrapedOutput.json");
+    const scrapedOutput = JSON.parse(dataFromScraper.toString("utf-8"));
+    res.json(scrapedOutput);
   } catch {
     res.json({"message": "loading"})
   }
