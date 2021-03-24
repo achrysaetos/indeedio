@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, Box, Heading, Flex, Text, Spinner, Divider } from "@chakra-ui/react"
+import { useQuery } from "@apollo/react-hooks"
 
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
@@ -8,6 +9,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons"
 
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
+import { FETCH_USER } from "../graphql/FETCH_USER"
 
 const dataFromArray = require("../companies.js")
 const companies = dataFromArray.companies
@@ -19,11 +21,12 @@ export default function Favorites({user, logout}) {
 
   const [ sortBy, setSortBy ] = useState("Relevancy")
   const [ keyword, setKeyword ] = useState("")
+
+  const { loading: loadingFetch, data: dataFetch } = useQuery(FETCH_USER, { variables: { userId: user?.id }})
   
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:8080")
-      let data = await response.json()
+    if (!loadingFetch){
+      let data = dataFetch.getUser.favs
       const data_copy = data.slice()
       if (sortBy === "Alphabetical"){
         data.sort((a,b) => (a.company > b.company) ? 1 : ((b.company > a.company) ? -1 : 0))
@@ -34,8 +37,7 @@ export default function Favorites({user, logout}) {
       setDataDefault(data)
       setLoading(false)
     }
-    fetchData()
-  }, [sortBy])
+  }, [sortBy, dataFetch, loadingFetch])
 
   useEffect(() => {
     const updateKeyword = (keyword) => {
