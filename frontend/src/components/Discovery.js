@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, Box, Heading, Flex, Text, Tooltip } from "@chakra-ui/react"
+import { Link, Box, Heading, Flex, Text } from "@chakra-ui/react"
 
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
@@ -98,7 +98,7 @@ export default function Discovery({user, logout}) {
         <Box w="100%">
           <Box pl={6} w="100%">
             <Box mb={4} w="100%">
-              <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={2}>Currently Hiring</Heading>
+              <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={2}>Discover</Heading>
               <Heading fontSize="xl" color="teal.500" textTransform="uppercase" py={2}>Software Engineering Intern</Heading>
               <Text as="em">{data.length} results ({dataDefault.length} total)</Text>
             </Box>
@@ -107,20 +107,12 @@ export default function Discovery({user, logout}) {
               return (
                 <Flex key={Math.random().toString(36).substring(4)}>
                   <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
-                  isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
+                  isExternal w={80} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
                     {x.company}
                   </Link>
-                  <Tooltip label={
-                      <>
-                        <Text>{x.location}</Text>
-                        <Text>Posted {x.posted}</Text>
-                      </>
-                    } placement="right" w="xl" hasArrow arrowSize={15}
-                  >
-                    <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
-                      {x.title}
-                    </Link>
-                  </Tooltip>
+                  <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
+                    {x.title}
+                  </Link>
                 </Flex>
               )
             })}
