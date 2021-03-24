@@ -8,13 +8,13 @@ export const LOGIN_USER = gql`
       username
       createdAt
       token
-      cards {
+      favs {
         id
-        cardNumber
-        cvvNumber
-        expirationMonth
-        expirationYear
-        balanceRemaining
+        company
+        title
+        link
+        location
+        posted
         createdAt
       }
     }
