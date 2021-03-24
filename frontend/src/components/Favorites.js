@@ -9,6 +9,9 @@ import { ChevronDownIcon } from "@chakra-ui/icons"
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
 
+const dataFromArray = require("../companies.js")
+const companies = dataFromArray.companies
+
 export default function Favorites({user, logout}) {
   const [data, setData] = useState([]);
   const [dataDefault, setDataDefault] = useState([]);
@@ -118,6 +121,14 @@ export default function Favorites({user, logout}) {
                 </Flex>
               )
             })}
+
+            <Box my={4} w="100%">
+              <Divider />
+              <Heading fontSize="xl" color="teal.500" textTransform="uppercase" py={2}>Companies to Filter</Heading>
+              <Text as="em">{companies.length} companies</Text>
+              <Divider mt={2} />
+            </Box>
+            <Text>{companies.join(", ")}</Text>
           </Box>
           <Footer />
         </Box>
