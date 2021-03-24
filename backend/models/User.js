@@ -5,13 +5,13 @@ const userSchema = new Schema({
   password: String,
   email: String,
   createdAt: String,
-  cards: [
+  favs: [
     {
-      cardNumber: String,
-      cvvNumber: String,
-      expirationMonth: String,
-      expirationYear: String,
-      balanceRemaining: String,
+      company: String,
+      title: String,
+      link: String,
+      location: String,
+      posted: String,
       createdAt: String,
     }
   ]

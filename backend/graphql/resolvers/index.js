@@ -1,4 +1,4 @@
-const cardsResolvers = require("./cards")
+const favsResolvers = require("./favs")
 const usersResolvers = require("./users")
 
 // restart the server after changing this file
@@ -8,6 +8,6 @@ module.exports = {
   },
   Mutation: {
     ...usersResolvers.Mutation,
-    ...cardsResolvers.Mutation
+    ...favsResolvers.Mutation
   }
 }
