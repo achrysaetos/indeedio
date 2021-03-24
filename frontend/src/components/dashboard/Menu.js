@@ -17,7 +17,7 @@ export default function Menu() {
             <Link as={aLink} to="/" _hover={{ color: "teal.500", fontWeight: "semibold" }}> Currently Hiring </Link> 
           </AccordionPanel>
           <AccordionPanel pb={4} ml={2}>
-            <Link as={aLink} to="/" _hover={{ color: "teal.500", fontWeight: "semibold" }}> My Favorites </Link> 
+            <Link as={aLink} to="/favorites" _hover={{ color: "teal.500", fontWeight: "semibold" }}> My Favorites </Link> 
           </AccordionPanel>
           <AccordionPanel pb={4} ml={2}>
             <Link as={aLink} to="/discover" _hover={{ color: "teal.500", fontWeight: "semibold" }}> Discover </Link> 

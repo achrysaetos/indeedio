@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, Box, Heading, Flex, Text, Tooltip } from "@chakra-ui/react"
+import { Link, Box, Heading, Flex, Text, Tooltip, Spinner, Divider } from "@chakra-ui/react"
 
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
@@ -77,7 +77,7 @@ export default function Dashboard({user, logout}) {
     else setSortBy("Relevancy")
   }
   
-  return loading ? "" : (
+  return loading ? <Spinner size="xl" color="teal.500" thickness="3px" speed="0.5s" display= "block" ml= "auto" mr= "auto" mt={40} /> : (
     <>
       {/* NAVBAR */}
       <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" py={6} pl={6}>
@@ -89,11 +89,11 @@ export default function Dashboard({user, logout}) {
 
         <Flex align="center" alignItems="flex-start">
           <Box>
-            <Input textAlign="left" mx={3} px={3} w="300px" size="lg" variant="flushed" focusBorderColor="grey"
+            <Input textAlign="left" mx={6} px={3} w="300px" size="lg" variant="flushed" focusBorderColor="grey"
               autoComplete="off" placeholder="Filter by company, title, or location..." name="keyword" type="text" value={keyword} 
               onChange={e => setKeyword(e.target.value)}
             />
-            <Flex justifyContent="flex-end" alignItems="baseline" px={3} pt={1}>
+            <Flex justifyContent="flex-end" alignItems="baseline" px={6} pt={1}>
               <Text mr={1} fontWeight="semibold">Sorted by:</Text>
               <Link onClick={() => changeSortOption()} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>{sortBy}</Link>
             </Flex>
@@ -119,12 +119,14 @@ export default function Dashboard({user, logout}) {
       {/* DASHBOARD */}
       <Flex justifyContent="flex-start">
         <Menu />
-        <Box w="100%">
+        <Box w="60%">
           <Box pl={6} w="100%">
             <Box mb={4} w="100%">
-              <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={2}>Currently Hiring</Heading>
+              <Heading fontSize="3xl" color="teal.500" textAlign="center" pb={4}>Currently Hiring</Heading>
+              <Divider />
               <Heading fontSize="xl" color="teal.500" textTransform="uppercase" py={2}>Software Engineering Intern</Heading>
               <Text as="em">{data.length} results ({dataDefault.length} total)</Text>
+              <Divider mt={2} />
             </Box>
 
             {data.map((x) => {
