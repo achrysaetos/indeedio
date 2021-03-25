@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react"
-import { Link, Box, Heading, Flex, Text, Spinner, Divider } from "@chakra-ui/react"
+import { Link, Box, Heading, Flex, Text, Tooltip, Spinner, Divider } from "@chakra-ui/react"
 import { useQuery } from "@apollo/react-hooks"
 
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
 import { Menu as MenuX, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from "@chakra-ui/react"
-import { ChevronDownIcon, StarIcon } from "@chakra-ui/icons"
+import { ChevronDownIcon } from "@chakra-ui/icons"
 
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
+import FavBtn from "./dashboard/FavBtn"
 import { FETCH_USER } from "../graphql/FETCH_USER"
 
 const dataFromArray = require("../companies.js")
 const companies = dataFromArray.companies
 
-export default function Favorites({user, logout}) {
+export default function Dashboard({user, logout}) {
   const [data, setData] = useState([]);
   const [dataDefault, setDataDefault] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -112,15 +113,23 @@ export default function Favorites({user, logout}) {
 
             {data.map((x) => {
               return (
-                <Flex key={Math.random().toString(36).substring(4)}>
-                  <StarIcon colorScheme="teal" variant="outline"/>
+                <Flex key={Math.random().toString(36).substring(4)} alignItems="baseline">
+                  <FavBtn user={user} favs={dataFetch.getUser.favs} info={x}/>
                   <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
-                  isExternal w={80} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
+                  isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
                     {x.company}
                   </Link>
-                  <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
-                    {x.title}
-                  </Link>
+                  <Tooltip label={
+                      <>
+                        <Text>{x.location}</Text>
+                        <Text>Posted {x.posted}</Text>
+                      </>
+                    } placement="right" w="xl" hasArrow arrowSize={15}
+                  >
+                    <Link fontSize="lg" href={x.link} isExternal w={500} _hover={{ color: "teal.500" }}>
+                      {x.title}
+                    </Link>
+                  </Tooltip>
                 </Flex>
               )
             })}
