@@ -16,7 +16,7 @@ Crawl thousands of open job positions and filter for specific qualities (by comp
 1. update `companies.js` to normalize preferred filters
 2. run `scraper.js` to crawl the most current data
 
-**IDEAS FOR EXTRA FEATURES:**<br/>
+**IDEAS FOR EXTRA FEATURES:**<br/><br/>
 Add optional background images to the `Login` and `Register` pages\
 Add option to update preferred companies in the `MyFavorites` page\
 Set up another spider (for other filters/search terms) and merge the outputs\
