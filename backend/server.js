@@ -29,7 +29,7 @@ app.use(cors()) // easiest way to enable cors
 // create the server for your express api endpoint
 app.get('/', (req, res) => {
   try {
-    const dataFromScraper = fs.readFileSync("./apify_storage/scrapedOutput.json");
+    const dataFromScraper = fs.readFileSync("./scraper_indeed/apify_storage/scrapedOutput.json");
     const scrapedOutput = JSON.parse(dataFromScraper.toString("utf-8"));
     res.json(scrapedOutput);
   } catch {
