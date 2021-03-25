@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/react-hooks"
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
 import { Menu as MenuX, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from "@chakra-ui/react"
-import { ChevronDownIcon } from "@chakra-ui/icons"
+import { ChevronDownIcon, StarIcon } from "@chakra-ui/icons"
 
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
@@ -113,6 +113,7 @@ export default function Favorites({user, logout}) {
             {data.map((x) => {
               return (
                 <Flex key={Math.random().toString(36).substring(4)}>
+                  <StarIcon colorScheme="teal" variant="outline"/>
                   <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
                   isExternal w={80} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
                     {x.company}

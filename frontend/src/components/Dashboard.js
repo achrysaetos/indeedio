@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, Box, Heading, Flex, Text, Tooltip, Spinner, Divider } from "@chakra-ui/react"
+import { useQuery } from "@apollo/react-hooks"
 
 import { Link as HomeLink } from "react-router-dom"
 import { Button, Input } from "@chakra-ui/react"
@@ -8,6 +9,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons"
 
 import Menu from "./dashboard/Menu"
 import Footer from "./dashboard/Footer"
+import FavBtn from "./dashboard/FavBtn"
+import { FETCH_USER } from "../graphql/FETCH_USER"
 
 const dataFromArray = require("../companies.js")
 const companies = dataFromArray.companies
@@ -19,6 +22,8 @@ export default function Dashboard({user, logout}) {
 
   const [ sortBy, setSortBy ] = useState("Relevancy")
   const [ keyword, setKeyword ] = useState("")
+
+  const { loading: loadingFetch, data: dataFetch } = useQuery(FETCH_USER, { variables: { userId: user?.id }})
   
   function filterCompanies(scrapedOutput) {
     let potentials = []
@@ -76,8 +81,8 @@ export default function Dashboard({user, logout}) {
     if (sortBy === "Relevancy") setSortBy("Alphabetical")
     else setSortBy("Relevancy")
   }
-  
-  return loading ? <Spinner size="xl" color="teal.500" thickness="3px" speed="0.5s" display= "block" ml= "auto" mr= "auto" mt={40} /> : (
+
+  return loading || loadingFetch ? <Spinner size="xl" color="teal.500" thickness="3px" speed="0.5s" display= "block" ml= "auto" mr= "auto" mt={40} /> : (
     <>
       {/* NAVBAR */}
       <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" py={6} pl={6}>
@@ -131,7 +136,8 @@ export default function Dashboard({user, logout}) {
 
             {data.map((x) => {
               return (
-                <Flex key={Math.random().toString(36).substring(4)}>
+                <Flex key={Math.random().toString(36).substring(4)} alignItems="baseline">
+                  <FavBtn user={user} favs={dataFetch.getUser.favs} info={x}/>
                   <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
                   isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
                     {x.company}
