@@ -12,11 +12,11 @@ Crawl thousands of open job positions and filter for specific qualities (by comp
 3. run `yarn start` in the frontend directory.
 4. Go to http://localhost:3000. Your Express API endpoint is up at localhost:8080, and your GraphQL playground is up at localhost:5000.
 
-**OPTIONAL PRE-LAUNCH SCRIPTS**
+**OPTIONAL PRE-LAUNCH SCRIPTS:**
 1. update `companies.js` to normalize preferred filters
 2. run `scraper.js` to crawl the most current data
 
-**IDEAS FOR EXTRA FEATURES:**\
+**IDEAS FOR EXTRA FEATURES:**<br/>
 Add optional background images to the `Login` and `Register` pages\
 Add option to update preferred companies in the `MyFavorites` page\
 Set up another spider (for other filters/search terms) and merge the outputs\
