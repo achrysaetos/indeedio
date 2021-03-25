@@ -6,7 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 import "semantic-ui-css/semantic.min.css"
 import "./App.css"
 import { AuthProvider } from "./context/auth"
-import AuthRoute from "./util/AuthRoute"
+import { AuthRoute, AuthRouteX } from "./util/AuthRoute"
 import { theme } from "./theme"
 
 import Home from "./pages/Home"
@@ -24,8 +24,8 @@ export default function App() {
           <Container> {/* semantic ui class to create margins */}
             <AuthRoute exact path="/" component={() => { window.location.href = 'https://achrysaetos.webflow.io/' }} />
             <Route exact path="/" component={Home} />
-            <Route exact path="/favorites" component={MyFavorites} />
-            <Route exact path="/discover" component={Discover} />
+            <AuthRouteX exact path="/favorites" component={MyFavorites} /> {/* redirect to home if user is not logged in */}
+            <AuthRouteX exact path="/discover" component={Discover} /> {/* redirect to home if user is not logged in */}
             <AuthRoute exact path="/login" component={Login} /> {/* redirect to home if user is logged in */}
             <AuthRoute exact path="/register" component={Register} /> {/* redirect to home if user is logged in */}
           </Container>
