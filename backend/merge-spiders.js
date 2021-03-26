@@ -1,8 +1,12 @@
 /*
 Search terms on Indeed are funny:
-"software engineering intern" === "software engineering internship"
-!== 
-"software engineer internship" === "software engineer intern"
+  "software engineering intern" === "software engineering internship"
+  !== 
+  "software engineer internship" === "software engineer intern"
+No need to scrape by date over relevance:
+  It's the same dataset, only results will be less accurate.
+No need to filter before scraping:
+  You don't want to miss anything, and you can always filter after.
 */
 const fs = require("fs");
 

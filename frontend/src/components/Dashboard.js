@@ -42,6 +42,7 @@ export default function Dashboard({user, logout}) {
         }
       }
     }
+    // returns the set of filtered companies
     for (let i=0; i<list.length; i++){
       list[i] = JSON.stringify(list[i])
     }
