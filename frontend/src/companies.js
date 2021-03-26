@@ -623,7 +623,7 @@ const companies = [
   "prosper marketplace",
   "proteus digital",
   "ptc",
-  "public",
+  "public.com",
   "pure storage",
   "pvolve",
   "qad",

@@ -6,12 +6,12 @@ fs.rmdirSync("./apify_storage", { recursive: true }); // update dataset with eve
 process.env.APIFY_LOCAL_STORAGE_DIR = "./apify_storage"; // location of dataset
 
 
-const websiteUrl = "https://www.themuse.com/advice/27-amazing-companies-to-build-a-career-in-tech"
-const numPagesToScrape = 1
+const websiteUrl = "https://www.indeed.com/jobs?q=software+engineering+intern&jt=internship&limit=50&filter=0&sort=date"
+const numPagesToScrape = 100
 
-const parentUnitSelector = ".company-round-up"
+const parentUnitSelector = ".jobsearch-SerpJobCard"
 const childUnitSelector = "" // see line 58 for access to child unit selectors
-const nextPageSelector = ""
+const nextPageSelector = ".pagination a"
 
 const datasetLocation = "./apify_storage/datasets/default"
 const outputLocation = "./apify_storage/scrapedOutput.json"
@@ -55,7 +55,11 @@ Apify.main(async () => {
         // We're getting the title, rank and URL of each post on Hacker News.
         $posts.forEach(($post) => {
           scrapedData.push({
-            name: $post.querySelector("h2").innerText
+            company: $post.querySelector(".company").innerText,
+            title: $post.querySelector(".jobtitle").innerText,
+            link: $post.querySelector(".jobtitle").href,
+            location: $post.querySelector(".location").innerText,
+            posted: $post.querySelector(".date").innerText,
           });
         });
 

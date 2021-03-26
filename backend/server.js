@@ -23,15 +23,14 @@ const express = require("express")
 const app = express()
 const port = 8080
 const cors = require("cors");
-const fs = require("fs");
+const dataFromArray = require("./merge-spiders.js")
+const newlist = dataFromArray.newlist
 
 app.use(cors()) // easiest way to enable cors
 // create the server for your express api endpoint
 app.get('/', (req, res) => {
   try {
-    const dataFromScraper = fs.readFileSync("./scraper_indeed/apify_storage/scrapedOutput.json");
-    const scrapedOutput = JSON.parse(dataFromScraper.toString("utf-8"));
-    res.json(scrapedOutput);
+    res.json(newlist);
   } catch {
     res.json({"message": "loading"})
   }
