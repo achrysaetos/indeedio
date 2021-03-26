@@ -22,6 +22,7 @@ Crawl thousands of open job positions and filter for specific qualities (by comp
 * Separate the navbar into its own component (for organizational purposes)
 * Additional notes about scraping are also included in `merge-spiders.js`
 
+
 ## Important files
 
 **scraper.js** -- your Puppeteer spider (enter your input parameters here). The JSON output is stored in `apify_storage/`.
@@ -29,3 +30,10 @@ Crawl thousands of open job positions and filter for specific qualities (by comp
 **merge-spiders.js** -- function to merge the scraped outputs and remove any duplicates. Called in `server.js` as part of the startup sequence.
 
 **companies.js** -- a list of all the companies to filter by. Currently keeps track of over 900 companies.
+
+
+## Screenshots ##
+
+![](/screenshots/1.png?raw=true)
+![](/screenshots/2.png?raw=true)
+![](/screenshots/3.png?raw=true)
