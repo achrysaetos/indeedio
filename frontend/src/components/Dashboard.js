@@ -26,13 +26,13 @@ export default function Dashboard({user, logout}) {
   const { loading: loadingFetch, data: dataFetch } = useQuery(FETCH_USER, { variables: { userId: user?.id }})
   
   function filterCompanies(scrapedOutput) {
-    let potentials = []
+    let list = []
     for (let i=0; i<scrapedOutput.length; i++){
       const scrapedOutput_cur = scrapedOutput[i].company.toLowerCase().split(" ")
       for (let j=0; j<companies.length; j++){
         const companies_cur = companies[j].split(" ")
         if (scrapedOutput_cur.every(x => companies_cur.includes(x)) || companies_cur.every(x => scrapedOutput_cur.includes(x))){
-          potentials.push({
+          list.push({
             company: scrapedOutput[i].company, 
             title: scrapedOutput[i].title, 
             link: scrapedOutput[i].link, 
@@ -42,6 +42,14 @@ export default function Dashboard({user, logout}) {
         }
       }
     }
+    for (let i=0; i<list.length; i++){
+      list[i] = JSON.stringify(list[i])
+    }
+    const set = new Set(list)
+    let potentials = []
+    set.forEach((x) => {
+      potentials.push(JSON.parse(x))
+    })
     return potentials
   }
 

@@ -6,7 +6,7 @@ fs.rmdirSync("./apify_storage", { recursive: true }); // update dataset with eve
 process.env.APIFY_LOCAL_STORAGE_DIR = "./apify_storage"; // location of dataset
 
 
-const websiteUrl = "https://www.indeed.com/jobs?q=software+engineering+intern&jt=internship&limit=50&filter=0&sort=date"
+const websiteUrl = "https://www.indeed.com/jobs?q=software+engineer+internship&jt=internship&limit=50&filter=0"
 const numPagesToScrape = 100
 
 const parentUnitSelector = ".jobsearch-SerpJobCard"
