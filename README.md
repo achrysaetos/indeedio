@@ -1,4 +1,4 @@
-# Job Search
+# Indeedio
 
 A personalized job search web app, built with React, GraphQL, MongoDB, and Node.
 
