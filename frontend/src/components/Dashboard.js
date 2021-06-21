@@ -38,6 +38,7 @@ export default function Dashboard({user, logout}) {
             link: scrapedOutput[i].link, 
             location: scrapedOutput[i].location,
             posted: scrapedOutput[i].posted,
+            corresponding: companies[j],
           })
         }
       }
@@ -147,10 +148,14 @@ export default function Dashboard({user, logout}) {
               return (
                 <Flex key={Math.random().toString(36).substring(4)} alignItems="baseline">
                   <FavBtn user={user} favs={dataFetch.getUser.favs} info={x}/>
-                  <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
-                  isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
-                    {x.company}
-                  </Link>
+
+                  <Tooltip label={x.corresponding} placement="left" mr={6}>
+                    <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company+" crunchbase"} 
+                    isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
+                      {x.company}
+                    </Link>
+                  </Tooltip>
+
                   <Tooltip label={
                       <>
                         <Text>{x.location}</Text>

@@ -115,7 +115,7 @@ export default function Dashboard({user, logout}) {
               return (
                 <Flex key={Math.random().toString(36).substring(4)} alignItems="baseline">
                   <FavBtn user={user} favs={dataFetch.getUser.favs} info={x}/>
-                  <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company} 
+                  <Link fontSize="lg" href={"https://www.google.com/search?q="+x.company+" crunchbase"} 
                   isExternal w={40} fontWeight="light" _hover={{ color: "black", fontWeight: "normal" }}>
                     {x.company}
                   </Link>
