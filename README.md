@@ -4,7 +4,7 @@ A personalized job search web app, built with React, GraphQL, MongoDB, and Node.
 
 Crawl thousands of open job positions and filter for specific qualities (by companies, keywords, and so on).
 
-*Don't forget to add your database url and api keys in `config.js`.*
+*Don't forget to add your database url and api keys in `config.js` and a list of preferred search terms in `companies.js`.*
 
 **TO LAUNCH THE SITE:**
 1. run `yarn start` in the backend directory -- connects to the MongoDB database and the Express API endpoint, and runs the spiders to scrape Indeed for job listings (once for each term).
