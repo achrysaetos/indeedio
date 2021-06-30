@@ -6,7 +6,7 @@ fs.rmdirSync("./apify_storage", { recursive: true }); // update dataset with eve
 process.env.APIFY_LOCAL_STORAGE_DIR = "./apify_storage"; // location of dataset
 
 
-const websiteUrl = "https://www.indeed.com/jobs?q=software+engineering+intern&jt=internship&limit=50&filter=0"
+const websiteUrl = "https://www.indeed.com/jobs?q=software+engineer+internship&jt=internship&limit=50&filter=0"
 const numPagesToScrape = 1
 
 const parentUnitSelector = ".tapItem"
@@ -14,7 +14,7 @@ const childUnitSelector = "" // see line 58 for access to child unit selectors
 const nextPageSelector = ".pagination a"
 
 const datasetLocation = "./apify_storage/datasets/default"
-const outputLocation = "./apify_storage/scrapedOutput.json"
+const outputLocation = "./apify_output/scraper_engineer.json"
 
 
 Apify.main(async () => {

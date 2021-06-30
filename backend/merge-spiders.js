@@ -10,10 +10,10 @@ No need to filter before scraping:
 */
 const fs = require("fs");
 
-const dataFromScraper = fs.readFileSync("./scraper_engineering/apify_storage/scrapedOutput.json");
+const dataFromScraper = fs.readFileSync("./apify_output/scraper_engineer.json");
 const scrapedOutput = JSON.parse(dataFromScraper.toString("utf-8"));
 
-const dataFromScraper2 = fs.readFileSync("./scraper_engineer/apify_storage/scrapedOutput.json");
+const dataFromScraper2 = fs.readFileSync("./apify_output/scraper_engineering.json");
 const scrapedOutput2 = JSON.parse(dataFromScraper2.toString("utf-8"));
 
 let list = scrapedOutput.concat(scrapedOutput2)

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "node clear-output.js && node apify_scrapers/engineer_scraper.js && node apify_scrapers/engineering_scraper.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
