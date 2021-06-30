@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "node scraper_engineer/scraper.js && node scraper_engineering/scraper.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
