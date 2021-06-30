@@ -25,7 +25,8 @@ Crawl thousands of open job positions and filter for specific qualities (by comp
 
 ## Important files
 
-**scraper.js** -- your Puppeteer spider (enter your input parameters here). The JSON output is stored in `apify_storage/`.
+**apify_scrapers/** -- your Puppeteer spiders (enter your input parameters here). The JSON output is stored in `apify_output/`. 
+*Always make sure that the websiteURLs and selectors are up to date!*
 
 **merge-spiders.js** -- function to merge the scraped outputs and remove any duplicates. Called in `server.js` as part of the startup sequence.
 

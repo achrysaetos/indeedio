@@ -7,7 +7,7 @@ process.env.APIFY_LOCAL_STORAGE_DIR = "./apify_storage"; // location of dataset
 
 
 const websiteUrl = "https://www.indeed.com/jobs?q=software+engineer+internship&jt=internship&limit=50&filter=0"
-const numPagesToScrape = 1
+const numPagesToScrape = 100
 
 const parentUnitSelector = ".tapItem"
 const childUnitSelector = "" // see line 58 for access to child unit selectors
